@@ -61,6 +61,78 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-博客3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/11/博客3/" class="article-date">
+  <time datetime="2015-10-11T11:19:17.000Z" itemprop="datePublished">2015-10-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/11/博客3/">本地通知</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#本地通知<br>本地通知（Location notification），用于基于时间行为的通知。</p>
+<p>###作用<br>有关日历提醒一类的应用。<br>如果应用程序不在前台运行，本地通知也是一个很有用的机制。比如，一个应用，在后台运行，向应用的服务器端获取消息，当消息到达时，比如下载跟新版本的提示消息，通过本地通知机制通知用户。</p>
+<hr>
+<p>###属性</p>
+<p>本地通知是UILocalNotification的实例，主要有三类属性：</p>
+<ul>
+<li>scheduled time  时间周期，用来指定iOS系统发送通知的日期和时间；</li>
+<li>notification type 通知类型，包括警告信息、动作按钮的标题、应用图标上的badge（数字标记）和播放的声音；</li>
+<li>user info 自定义数据，本地通知可以包含一个NSDictionary类型的本地数据。</li>
+</ul>
+<p><em>注意:对本的通知的属性限制，iOS最多允许最近本地通知数量是64个，超过限制的本地通知将被iOS忽略。</em></p>
+<hr>
+<p>###通知的类型（显示方式）</p>
+<ul>
+<li>横幅（Banner）</li>
+</ul>
+<p>很负通知是在iOS5种出新的新特性，是显示在屏幕顶部的横条，几秒钟后就会自动消失。一条横幅通知会消失程序的小图标（低分屏下显示29x29的图标，高分屏显示58x58的图标），程序的名字和通知的内容。小图标可以帮助用户一眼就看清楚是哪一个应用程序在提醒他们。</p>
+<ul>
+<li>提醒（Alert）</li>
+</ul>
+<p>提醒通知不会自动消失，需要用户与之交互才能关闭。设计师需要设计通知的具体内容，有时还要action button设计title。整个提醒通知的背景样式，包括里面的按钮的样式都是不可变的，所以设计师和开发者就不要在这里发挥创意了，Android犹豫其开放性，我们是可以使用自己设计的控件的，而iOS这样做可能是为了保持UI风格一致性。</p>
+<ul>
+<li>标记（Badge）</li>
+</ul>
+<p>标记通知是现实在程序图标的右上角的红色椭圆形标记，里面显示的数字表示需要用户处理的通知的数量。同样的，标记的颜色和形状、大小也是不可改变的。App Store中有更新的应用程序的数量，Mail中收到的未读邮件数量都是用标记通知用户的。</p>
+<ul>
+<li>声音（Sound）</li>
+</ul>
+<p>声音提示也是iOS的一种通知方式，支持自定义，也可以与前面三种通知类型搭配使用。</p>
+<hr>
+<p>###通知的初始化和调度<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UILocationNotification</span> *localNotif = [[<span class="built_in">UILocationNotification</span> alloc]init];</span><br><span class="line"><span class="built_in">NSDate</span> *new = [<span class="built_in">NSDate</span> new];</span><br><span class="line"><span class="comment">//NSDate * date1 = [NSDate dateWithTimeInterval:10 sinceDate:now];</span></span><br><span class="line">localNotif<span class="variable">.fireDate</span> = [now dateByAddingTimeInterval:<span class="number">5</span>];</span><br><span class="line">localNotif<span class="variable">.timeZone</span> = [<span class="built_in">NSTimeZone</span> defaultTimeZone];</span><br><span class="line">localNotif<span class="variable">.alertBody</span> = <span class="string">@"吃饭时间到了，通知提醒..."</span>;</span><br><span class="line"><span class="comment">//Set the action button</span></span><br><span class="line">localNotif<span class="variable">.alertAction</span> = <span class="string">@"OPEN"</span>; <span class="comment">//弹出通知提醒的时候 按钮的文本内容</span></span><br><span class="line"><span class="comment">//localNotif.soundName = UILocalNotificationDefaultSoundName;</span></span><br><span class="line">localNotif<span class="variable">.soundName</span> = <span class="string">@"msgcome.wav"</span>;</span><br><span class="line">localNotif<span class="variable">.applicationIconBadgeNumber</span> = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">NSDictionary</span> *infoDict = [<span class="built_in">NSDictionary</span> dictionaryWithObject:<span class="string">@"someValue"</span> forKey:<span class="string">@"someKey"</span>];</span><br><span class="line">localNotif<span class="variable">.userInfo</span> = infoDict;</span><br><span class="line">[[<span class="built_in">UIApplication</span> sharedApplication] scheduleLocalNotification:localNotif];</span><br></pre></td></tr></table></figure></p>
+<p>###iOS8中<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//iOS8 需要现在程序入口的方法里向系统注册本地通知的类型</span></span><br><span class="line">[application registerUserNotificationSettings:[<span class="built_in">UIUserNotificationSettings</span> settingsForTypes:<span class="built_in">UIUserNotificationTypeAlert</span> | <span class="built_in">UIUserNotificationTypeBadge</span> |<span class="built_in">UIUserNotificationTypeSound</span> categories:<span class="literal">nil</span>]];</span><br></pre></td></tr></table></figure></p>
+<p>###通知的接收</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions<span class="comment">//当应用程序在没有运行时，接受通知</span>￼<span class="built_in">UILocalNotification</span> *localNotifcation = [launchOptions objectForKey:U￼IApplicationLaunchOptionsLocalNotificationKey];￼<span class="keyword">if</span> (localNotifcation != <span class="literal">nil</span>) &#123;￼￼&#125;<span class="comment">//处理通知</span>￼<span class="keyword">return</span> <span class="literal">YES</span>;<span class="comment">//当应用程序在后台收到本地通知，用户点击Action按钮时，会调用这个方法</span>￼- (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didReceiveLocalNotificat￼ion:(<span class="built_in">UILocalNotification</span> *)notification￼<span class="built_in">NSLog</span>(<span class="string">@"%s"</span>,__func__);￼<span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,notification<span class="variable">.userInfo</span>);￼&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>###使用通知的时候的注意事项<br>1.保证标记的内容是最新的<br>2.对同一事件不要发出多个通知<br>3.通知内容不用包含应用程序的名称<br>4.对于标记型通知，当所有事项都解决后，标记会自动消失<br>5.在横幅和提醒中，以及顶部的通知中心里，iOS系统会自动在小溪里显示应用程序的名称，所以在设计通知的内同时，就无需包含app的名称了<br>6.关注于信息的表达，而不是用户的动作。避免提示用户去点哪一个按钮或者是怎样打开app<br>7.简短，最好不超过两行。长信息难以快速阅读，而且必然会有滚动条<br>8.使用句式大写（sentence－style capitalization，第一个单词的首字母大写）和合适的标点符号，结尾一般使用句号</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/10/11/博客3/" data-id="cisfy3etm0005vufyvbi2soya" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-博客4" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/10/11/博客4/" class="article-date">
@@ -128,7 +200,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/11/博客4/" data-id="cik0v4nrq00045kfyyprjqlbe" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/11/博客4/" data-id="cisfy3etk0004vufyxnuo7vjq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -292,7 +364,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/11/博客2/" data-id="cik0v4nru00065kfy9kzyf9l0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/11/博客2/" data-id="cisfy3eto0006vufyna6l0cce" class="article-share-link">Share</a>
       
       
     </footer>
@@ -321,7 +393,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -331,6 +403,10 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/08/29/html-div-纵向滑动/">html div 纵向滑动</a>
+          </li>
         
           <li>
             <a href="/2016/01/30/unity3d-与-增强现实/">unity3d 与 增强现实</a>
@@ -346,10 +422,6 @@
         
           <li>
             <a href="/2015/12/24/swift系统音频AudioServices/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/10/swift-音频AVAudioPlayer/">swift 音频AVAudioPlayer</a>
           </li>
         
       </ul>
