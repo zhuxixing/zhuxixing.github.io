@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>微信开发之上传并下载多媒体文件到本地服务器 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="date: 2016-10-29 15:56:20
+tags:##编译环境:vs2010   \  .net  \   ajax(get)
+1、首先引用微信开发接口 
+
+
+
+然后wx.config、wx.ready这些就不细说了关键的是把要用到的接口放到该放的位置 不多说上代码。
+&amp;lt;script type=&quot;text/javascript&quot;&amp;gt;
+
+      alert(&quot;timesta">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信开发之上传并下载多媒体文件到本地服务器">
+<meta property="og:url" content="http://yoursite.com/2016/10/29/微信开发之上传并下载多媒体文件到本地服务器/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="date: 2016-10-29 15:56:20
+tags:##编译环境:vs2010   \  .net  \   ajax(get)
+1、首先引用微信开发接口 
+
+
+
+然后wx.config、wx.ready这些就不细说了关键的是把要用到的接口放到该放的位置 不多说上代码。
+&amp;lt;script type=&quot;text/javascript&quot;&amp;gt;
+
+      alert(&quot;timesta">
+<meta property="og:updated_time" content="2016-10-29T08:18:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信开发之上传并下载多媒体文件到本地服务器">
+<meta name="twitter:description" content="date: 2016-10-29 15:56:20
+tags:##编译环境:vs2010   \  .net  \   ajax(get)
+1、首先引用微信开发接口 
+
+
+
+然后wx.config、wx.ready这些就不细说了关键的是把要用到的接口放到该放的位置 不多说上代码。
+&amp;lt;script type=&quot;text/javascript&quot;&amp;gt;
+
+      alert(&quot;timesta">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-微信开发之上传并下载多媒体文件到本地服务器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/29/微信开发之上传并下载多媒体文件到本地服务器/" class="article-date">
+  <time datetime="2016-10-29T08:18:30.000Z" itemprop="datePublished">2016-10-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      微信开发之上传并下载多媒体文件到本地服务器
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>date: 2016-10-29 15:56:20</p>
+<h2 id="tags:">tags:</h2><p>##编译环境:<br>vs2010   \  .net  \   ajax(get)</p>
+<p>1、首先引用微信开发接口 </p>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+
+<p>然后wx.config、wx.ready这些就不细说了关键的是把要用到的接口放到该放的位置 不多说上代码。</p>
+<pre><code><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="actionscript">
+
+      alert(<span class="string">"timestamp:"</span> + <span class="string">'&lt;%=jsdk.timestamp %&gt;'</span> + <span class="string">" nonceStr:"</span> + <span class="string">'&lt;%=jsdk.nonceStr %&gt;'</span> + <span class="string">" signature:"</span> + <span class="string">'&lt;%=jsdk.signature %&gt;'</span>);
+        wx.config({
+            debug: <span class="literal">false</span>, <span class="comment">// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。</span>
+            appId: <span class="string">'&lt;%=jsdk.appId %&gt;'</span>, <span class="comment">// 必填，公众号的唯一标识</span>
+            timestamp: <span class="string">'&lt;%=jsdk.timestamp %&gt;'</span>, <span class="comment">// 必填，生成签名的时间戳</span>
+            nonceStr: <span class="string">'&lt;%=jsdk.nonceStr %&gt;'</span>, <span class="comment">// 必填，生成签名的随机串</span>
+            signature: <span class="string">'&lt;%=jsdk.signature %&gt;'</span>, <span class="comment">// 必填，签名，见附录1</span>
+            jsApiList: [<span class="string">'startRecord'</span>, <span class="string">'stopRecord'</span>, <span class="string">'playVoice'</span>, <span class="string">'uploadVoice'</span>, <span class="string">'onVoiceRecordEnd'</span>, <span class="string">'downloadVoice'</span>]
+            <span class="comment">// 必填，需要使用的JS接口列表，所有JS接口列表见附录2</span>
+        });
+<span class="comment">//            wx.ready(function () {</span>
+    <span class="comment">//                wx.checkJsApi({</span>
+<span class="comment">//                    jsApiList: ['startRecord', //获取“分享到朋友圈”按钮点击状态及自定义分享内容接口</span>
+<span class="comment">//                            'stopRecod'</span>
+    <span class="comment">//                            , 'playVoice'</span>
+    <span class="comment">//                ], // 需要检测的JS接口列表，所有JS接口列表见附录2,</span>
+<span class="comment">//                    success: function (res) {</span>
+<span class="comment">//                        // 以键值对的形式返回，可用的api值true，不可用为false</span>
+                    <span class="comment">//{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}</span>
+<span class="comment">//                        if (res.errMsg == "checkJsApi:ok") {</span>
+<span class="comment">//                            var result = res.checkResult;</span>
+
+<span class="comment">//                            if (!result.startRecod) {</span>
+<span class="comment">//                                alert("当前版本不支持startRecod接口");</span>
+<span class="comment">//                            }</span>
+
+<span class="comment">//                            if (!result.stopRecod) {</span>
+<span class="comment">//                                alert("当前版本不支持stopRecod接口");</span>
+<span class="comment">//                            }</span>
+<span class="comment">//                        }</span>
+<span class="comment">//                        else {</span>
+<span class="comment">//                            alert("js接口调用失败：" + res.errMsg);</span>
+<span class="comment">//                        }</span>
+<span class="comment">//                    },</span>
+<span class="comment">//                    fail: function (res) { alert("接口调用失败"); }, //接口调用失败时执行的回调函数。</span>
+<span class="comment">//                    complete: function (res) { }, //接口调用完成时执行的回调函数，无论成功或失败都会执行。 </span>
+<span class="comment">//                    cancel: function (res) { alert("用户点击取消时的回调函数，仅部分有用户取消操作的api才会用到"); }, //用户点击取消时的回调函数，仅部分有用户取消操作的api才会用到。 </span>
+<span class="comment">//                    trigger: function (res) { alert("接口调用失败"); } //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口。</span>
+<span class="comment">//                });</span>
+<span class="comment">//            });</span>
+        <span class="keyword">var</span> local;
+    <span class="function"><span class="keyword">function</span> <span class="title">kaishiluyin</span><span class="params">()</span> </span>{
+        wx.startRecord();
+        wx.onVoiceRecordEnd({
+            <span class="comment">// 录音时间超过一分钟没有停止的时候会执行 complete 回调</span>
+            complete: <span class="function"><span class="keyword">function</span> <span class="params">(res)</span> </span>{
+                 local = res.localId;
+            }
+        });
+    }
+          <span class="function"><span class="keyword">function</span> <span class="title">tingzhiluyin</span><span class="params">()</span> </span>{
+
+        wx.stopRecord({
+
+            success: <span class="function"><span class="keyword">function</span> <span class="params">(res)</span> </span>{
+                local = res.localId;
+                alert(local.toString());
+            }
+        });
+    }
+    <span class="function"><span class="keyword">function</span> <span class="title">bofangluyin</span><span class="params">()</span> </span>{
+        wx.playVoice({
+            localId: local <span class="comment">// 需要播放的音频的本地ID，由stopRecord接口获得</span>
+
+        });
+        alert(local.toString());
+    }
+
+    <span class="function"><span class="keyword">function</span> <span class="title">uploadvoice</span><span class="params">()</span> </span>{
+
+
+        wx.uploadVoice({
+            localId: local, <span class="comment">// 需要上传的音频的本地ID，由stopRecord接口获得</span>
+            isShowProgressTips: <span class="number">1</span>, <span class="comment">// 默认为1，显示进度提示</span>
+            success: <span class="function"><span class="keyword">function</span> <span class="params">(res)</span> </span>{
+                <span class="comment">// alert('上传语音成功，serverId 为' + res.serverId);</span>
+                <span class="keyword">var</span> serverId = res.serverId; <span class="comment">// 返回音频的服务器端ID</span>
+                <span class="keyword">var</span> wid = <span class="number">3</span>;
+
+                /ar senddates = <span class="keyword">new</span> Date().format(<span class="string">"yyyy/MM/dd hh:mm:ss"</span>)
+                $.ajax({
+                    type: <span class="string">"get"</span>,  <span class="comment">//提交方式  </span>
+                    url: <span class="string">"WebForm1.aspx?wid="</span> + wid.toString() + <span class="string">"&amp;serverId="</span> + serverId, <span class="comment">//路径  </span>
+                    success: <span class="function"><span class="keyword">function</span> <span class="params">(result)</span> </span>{
+
+                        alert(result);
+
+                    }
+                });
+
+            }
+        });
+    }
+    <span class="function"><span class="keyword">function</span> <span class="title">downloadvoice</span><span class="params">()</span> </span>{
+
+        wx.downloadVoice({
+            serverId: serverId, <span class="comment">// 需要下载的音频的服务器端ID，由uploadVoice接口获得</span>
+            isShowProgressTips: <span class="number">1</span>, <span class="comment">// 默认为1，显示进度提示</span>
+            success: <span class="function"><span class="keyword">function</span> <span class="params">(res)</span> </span>{
+                <span class="keyword">var</span> localId = res.localId; <span class="comment">// 返回音频的本地ID</span>
+                alert(<span class="string">'下载语音成功，localId 为'</span> + res.localId);
+            }
+        });
+    }
+
+    </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+</code></pre><p>2、ajax异步请求的代码</p>
+<pre><code><span class="keyword">using</span> System;    
+
+<span class="keyword">using</span> System.Collections.Generic;
+<span class="keyword">using</span> System.Linq;
+<span class="keyword">using</span> System.Web;
+<span class="keyword">using</span> System.Web.UI;
+<span class="keyword">using</span> System.Web.UI.WebControls;
+<span class="keyword">using</span> System.Net;
+<span class="keyword">using</span> TandT.WinxinComm;
+<span class="keyword">namespace</span> TandT.WeixinWeb.web
+{
+<span class="keyword">public</span> partial <span class="keyword">class</span> WebForm1 : System.Web.UI.Page
+{
+    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">Page_Load</span><span class="params">(object sender, EventArgs e)</span>
+    </span>{
+        <span class="built_in">string</span> serverId = Request.QueryString[<span class="string">"serverId"</span>];
+        <span class="keyword">int</span> wid = <span class="keyword">int</span>.Parse(Request.QueryString[<span class="string">"wid"</span>]);
+        Response.Clear(); <span class="comment">//清除所有之前生成的Response内容</span>
+
+        Alert(serverId);
+        Response.Write(UploadVoice(wid, serverId));
+
+        Response.End(); <span class="comment">//停止Response后续写入动作，保证Response内只有我们写入内容</span>
+
+    }
+    <span class="function"><span class="keyword">public</span> <span class="built_in">string</span> <span class="title">UploadVoice</span><span class="params">(<span class="keyword">int</span> wid, <span class="built_in">string</span> MEDIA_ID)</span>
+    </span>{
+        <span class="built_in">string</span> file = <span class="built_in">string</span>.Empty;
+        <span class="built_in">string</span> content = <span class="built_in">string</span>.Empty;
+        <span class="built_in">string</span> strpath = <span class="built_in">string</span>.Empty;
+        <span class="built_in">string</span> savepath = <span class="built_in">string</span>.Empty;
+        <span class="comment">//string MEDIA_ID = TandT.Common.DTRequest.GetFormString("MEDIA_ID");</span>
+        <span class="comment">//int wid = TandT.Common.DTRequest.GetFormIntValue("wid", 0);</span>
+        <span class="built_in">string</span> error;
+        <span class="built_in">string</span> accestoken = <span class="keyword">new</span> WeiXinCRMComm().getAccessToken(wid, out error);
+        <span class="built_in">string</span> stUrl = <span class="string">"http://file.api.weixin.qq.com/cgi-bin/media/get?access_token="</span> + accestoken + <span class="string">"&amp;media_id="</span> + MEDIA_ID;
+
+        HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(stUrl);
+
+        req.Method = <span class="string">"GET"</span>;
+        <span class="keyword">using</span> (WebResponse wr = req.GetResponse())
+        {
+            HttpWebResponse myResponse = (HttpWebResponse)req.GetResponse();
+
+            strpath = myResponse.ResponseUri.ToString();
+
+            WebClient mywebclient = <span class="keyword">new</span> WebClient();
+            savepath = Server.MapPath(<span class="string">"voice"</span>) + <span class="string">"\\"</span> + DateTime.Now.ToString(<span class="string">"yyyyMMddHHmmssfff"</span>) + (<span class="keyword">new</span> Random()).Next().ToString().Substring(<span class="number">0</span>, <span class="number">4</span>) + <span class="string">".AMR"</span>;
+
+            <span class="keyword">try</span>
+            {
+                mywebclient.DownloadFile(strpath, savepath);
+                file = savepath;
+
+            }
+            <span class="keyword">catch</span> (Exception ex)
+            {
+                savepath = ex.ToString();
+            }
+
+        }
+        <span class="keyword">return</span> savepath;
+
+    }
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Alert</span><span class="params">(<span class="built_in">string</span> str_Message)</span>
+    </span>{
+        ClientScriptManager scriptManager = ((Page)System.Web.HttpContext.Current.Handler).ClientScript;
+        scriptManager.RegisterStartupScript(typeof(<span class="built_in">string</span>), <span class="string">""</span>, <span class="string">"alert('"</span> + str_Message + <span class="string">"');"</span>, <span class="literal">true</span>);
+    }
+
+
+}
+</code></pre><p>}</p>
+<p>代码全部复制粘贴即可用</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/29/微信开发之上传并下载多媒体文件到本地服务器/" data-id="ciuuxrzzw0001qgfy1gx1yzsa" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/09/24/base60to十六进制C/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">base60to十六进制C#</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/29/微信开发之上传并下载多媒体文件到本地服务器/">微信开发之上传并下载多媒体文件到本地服务器</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/24/base60to十六进制C/">base60to十六进制C#</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/29/html-div-纵向滑动副本/">html div 纵向滑动</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/29/html-div-纵向滑动/">html div 纵向滑动</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/30/unity3d-与-增强现实/">unity3d 与 增强现实</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
