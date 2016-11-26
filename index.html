@@ -61,6 +61,37 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-微信开发之AMR转MP3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/26/微信开发之AMR转MP3/" class="article-date">
+  <time datetime="2016-11-26T09:15:44.000Z" itemprop="datePublished">2016-11-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="＃微信开发之AMR转MP3（-NET）">＃微信开发之AMR转MP3（.NET）</h2><p>#####在微信开发越来越火热的今天，可能有很多开发者被微信的多媒体录音下载到本地的AMR文件坑的不轻，在这里介绍一种可行的解决办法。<br>1、首先下载ffmpeg.exe程序，（这个太坑了当时找了好几个都不行，程序的大小起码得在20M以上才行，其他的可能都是坑爹的不知道什么垃圾软件）。<br>2、然后废话不多说直接就上代码和截图了。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">Page_Load</span>(<span class="params"><span class="keyword">object</span> sender, EventArgs e</span>)        </span>&#123;  <span class="keyword">string</span> savepath = Server.MapPath(<span class="string">"~/uploadr/"</span>) + <span class="string">"文件名.amr"</span>;            <span class="keyword">string</span> mp3SavePth = Server.MapPath(<span class="string">"~/upload/mp3/"</span>) + <span class="string">"文件名.amr"</span>.Split(<span class="string">'.'</span>)[<span class="number">0</span>].ToString() + <span class="string">".mp3"</span>;            ConvertToMp3(savepath, mp3SavePth);        &#125;          <span class="function"><span class="keyword">public</span> <span class="keyword">string</span> <span class="title">ConvertToMp3</span>(<span class="params"><span class="keyword">string</span> pathBefore, <span class="keyword">string</span> pathLater</span>)    </span>&#123;        <span class="keyword">string</span> c = Server.MapPath(<span class="string">"/ffmpeg/"</span>) + <span class="string">"ffmpeg.exe -i "</span> + pathBefore + <span class="string">" "</span> + pathLater;        <span class="keyword">string</span> str = RunCmd(c);        <span class="keyword">return</span> str;    &#125;    <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;summary&gt;</span></span>    <span class="comment"><span class="xmlDocTag">///</span> 执行Cmd命令</span>    <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;/summary&gt;</span></span>    <span class="function"><span class="keyword">private</span> <span class="keyword">string</span> <span class="title">RunCmd</span>(<span class="params"><span class="keyword">string</span> c</span>)    </span>&#123;        <span class="keyword">try</span>        &#123;            ProcessStartInfo info = <span class="keyword">new</span> ProcessStartInfo(<span class="string">"cmd.exe"</span>);            info.RedirectStandardOutput = <span class="keyword">false</span>;            info.UseShellExecute = <span class="keyword">false</span>;            Process p = Process.Start(info);            p.StartInfo.UseShellExecute = <span class="keyword">false</span>;            p.StartInfo.RedirectStandardInput = <span class="keyword">true</span>;            p.StartInfo.RedirectStandardOutput = <span class="keyword">true</span>;            p.StartInfo.RedirectStandardError = <span class="keyword">true</span>;            p.Start();            p.StandardInput.WriteLine(c);            p.StandardInput.AutoFlush = <span class="keyword">true</span>;            Thread.Sleep(<span class="number">1000</span>);            p.StandardInput.WriteLine(<span class="string">"exit"</span>);            p.WaitForExit();            <span class="keyword">string</span> outStr = p.StandardOutput.ReadToEnd();            p.Close();            <span class="keyword">return</span> outStr;        &#125;        <span class="keyword">catch</span> (Exception ex)        &#123;            <span class="keyword">return</span> <span class="string">"error"</span> + ex.Message;        &#125;    &#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>要注意工程的结构</p>
+<p><img src="/Users/qixiang/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/1193366863/Image/$L4${0`]D{}ED540[W@%JGW.png" alt="Mou icon"></p>
+<p>这个是在VS2010下的工程。如需人工服务请联系QQ：704539773</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/11/26/微信开发之AMR转MP3/" data-id="civz05jqm0002gcfyc2oricxs" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-微信开发之上传并下载多媒体文件到本地服务器" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/10/29/微信开发之上传并下载多媒体文件到本地服务器/" class="article-date">
@@ -277,7 +308,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/29/微信开发之上传并下载多媒体文件到本地服务器/" data-id="ciuuxrzzw0001qgfy1gx1yzsa" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/10/29/微信开发之上传并下载多媒体文件到本地服务器/" data-id="civz05jqh0001gcfyzxjeobsq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -315,7 +346,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/09/24/base60to十六进制C/" data-id="ciuuxrzw90000qgfymohl4tj1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/09/24/base60to十六进制C/" data-id="civz05jq60000gcfyss148ji1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -378,7 +409,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/29/html-div-纵向滑动副本/" data-id="ciuuxs00y000dqgfy8pwe39tb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/08/29/html-div-纵向滑动副本/" data-id="civz05jrn000egcfy748ashmj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -441,7 +472,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/29/html-div-纵向滑动/" data-id="ciuuxs010000eqgfyxkgj349e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/08/29/html-div-纵向滑动/" data-id="civz05jrr000fgcfye6c0uz0v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -479,7 +510,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/30/unity3d-与-增强现实/" data-id="ciuuxs00n0009qgfyulkm9zzg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/01/30/unity3d-与-增强现实/" data-id="civz05jr9000agcfytmse8065" class="article-share-link">Share</a>
       
       
     </footer>
@@ -516,7 +547,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/31/iosAPP横竖屏/" data-id="ciuuxs00w000cqgfy3q93mx4o" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/31/iosAPP横竖屏/" data-id="civz05jrj000dgcfynh9zew0k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -554,7 +585,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/31/屏幕适配问题/" data-id="ciuuxs0070002qgfyzyedze05" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/31/屏幕适配问题/" data-id="civz05jqq0003gcfy0nh6pb1v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -582,7 +613,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/24/swift系统音频AudioServices/" data-id="ciuuxs00q000aqgfy641oai5x" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/24/swift系统音频AudioServices/" data-id="civz05jre000bgcfy7sd1dosl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -620,89 +651,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/10/swift-音频AVAudioPlayer/" data-id="ciuuxs00t000bqgfytb8mjk7y" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-博客6" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/11/06/博客6/" class="article-date">
-  <time datetime="2015-11-06T09:07:54.000Z" itemprop="datePublished">2015-11-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/06/博客6/">Socket简介</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##什么是Socket    </p>
-<p>Socket又称之为“套接字”，是系统提供的用于网路通信的方法。它实质上并不是一种协议，没有规定计算机应当怎样传递消息，只是给程序员提供了一个发送消息的接口，程序员使用这个接口提供的方法，发送与接收消息。<br>Socket描述了一个IP、端口对，它简化了程序员的操作，知道对方的IP以及PORT就可以给对方发送消息，再由服务器端来处理发送的这些消息。所以，Socket一定包含了通信的双发，即客户端（Client）与服务器（Server）。</p>
-<p>##Socket通信的过程?</p>
-<p>每一个应用或者说服务，都有一个端口。比如DNS的53端口，http的80端口。我们能由DNS请求到查询信息，是因为DNS服务器时时刻刻都在监听53端口，当收到我们的查询请求后，就能够返回我们想要的IP信息。所以，从程序设计上讲，应该包含以下步骤：   </p>
-<ul>
-<li>服务器端利用Socket监听端口；  </li>
-<li>客户端发起连接；  </li>
-<li>服务器端返回信息，建立连接，开始通信；  </li>
-<li>客户端，服务器端断开连接；   </li>
-</ul>
-<p>##Http和Socket连接的区别</p>
-<p>#####1、TCP连接</p>
-<p>要想明白Socket连接，就要明白TCP连接。手机能够使用互联网功能是因为手机底层实现了TCP/IP协议，可以使手机终端通过无线网络建立TCP连接。TCP协议可以对上层网络提供接口，使上层网络数据的传输建立在“无差别”的网络之上。“三次握手”，握手过程中传递的包里不包含数据，三次握手完毕后，服务器和客户端才正式开始传递数据。理想状态下，TCP连接一旦建立，在通信双方中的任何一方主动关闭连接之前，TCP连接都将被一直保持下去。</p>
-<p>#####2、HTTP连接</p>
-<p>HTTP协议，是Web联网的基础，也是手机联网常用的协议之一，HTTP协议是建立在TCP协议之上的一种应用。</p>
-<p>HTTP连接最显著的特点是客户端发送的每次请求都需要服务器会送响应，在请求结束后，会主动释放连接。从建立连接到关闭连接的过程称为“一次连接”。<br>由于HTTP在每次请求结束后都会主动释放连接，因此HTTP连接是一种“短连接”，要保持客户端程序的在线状态，需要不断地向服务器发起连接请求。通常的做法是即时不需要获得任何数据，客户端也保持每隔一段固定的时间向服务器发送一次“保持连接”的请求，服务器在收到该请求后对客户端进行回复，表明知道客户端“在线”。若服务器长时间无法收到客户端的请求，则认为客户端“下线”，若客户端长时间无法收到服务器和回复，则认为网络已经断开。</p>
-<p>#####3、SOCKET原理</p>
-<p>######3.1套接字（Socket）概念</p>
-<p>套接字是通信的基石，是支持TCP/IP协议的网路通信的基本操作单元。它是网路通信过程中端点的抽象表示，包含进行网路通信必须的五种信息：连接使用的协议，本地主机的IP地址，本地进程的协议端口，远地主机的IP地址，远地进程的协议端口。</p>
-<p>######3.2建立socket连接</p>
-<p>套接字是成对出现的：客户端 ClientSocket  服务器端 ServerSocket  他们之间连接的三个步骤：服务器监听，客户端请求，连接确认。</p>
-<p>服务器监听：服务器端套接字并不定位具体的客户端套接字。而是处于等待连接的状态，实时监控网路状态，等待客户端的连接请求。</p>
-<p>客户端请求：指客户端的套接字提出连接请求，要连接的目标是服务器的套接字。为此客户端的套接字必须首先描述它要连接的服务器的套接字，指出服务器的套接字，指出服务器端套接字的地址和端口号，然后就向服务器端套接字提出连接请求。</p>
-<p>确认连接：当服务器端套接字监听到或者说接收到客户端套接字的连接请求时，就响应客户端套接字的请求，建立一个新的线程，把服务器端套接字的描述发给客户端，一旦客户端确认了此描述，双方就正式建立连接。而服务器端套接字继续处于监听状态，继续接收其它客户端套接字的连接请求。</p>
-<p>#####4、Socket 连接与HTTP连接</p>
-<p>由于通常情况下Socket连接就是TCP连接，因此Socket连接一点建立，通信双方即可开始相互发送数据内容，直到双方连接断开。但在实际网络应用中，客户端到服务器之间的通信网网需要穿越多个中间节点，例如路由器、网关、防火墙等，大部分防火请默认会关闭长时间处于非活跃状态的连接而导致Socket连接断开，因此需要通过轮询告诉网络，该连接处于活跃状态。</p>
-<p>而HTTP连接使用的是“请求————响应”的方式，不仅在请求时需要先建立连接，而且需要客户端向服务器发出请求后，服务器才能回复数据。</p>
-<p>很多情况下，需要服务器端主动向客户端推送数据，保持客户端与服务器端数据的实时与同步。此时若双方建立的是Socket连接，服务器就能直接将数据传送给客户端：若双方建立的是HTTP连接，则服务器需要等到客户端发送一次请求后才能将数据传回给客户端，因此，客户端定时向服务器端发送连接请求不仅可以保持在线，同时也是在“询问”服务器是否有新的数据，如果有就将数据传给客户端。</p>
-<p>######HTTP连接是什么意思</p>
-<p>HTTP是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。</p>
-<p>HTTP协议的主要特点：   </p>
-<ul>
-<li>支持客户/服务器模式        </li>
-</ul>
-<ul>
-<li>简单快速：客户向服务器请求服务时，只需传送请求方法和路径。请求方法常用的有get、post。每种方法规定了客户与服务器联系的类型不同。由于HTTP协议简单，使得HTTP服务器的规模小，因而通信速度很快。</li>
-</ul>
-<ul>
-<li>灵活：HTTP允许传输任意类型的数据对象。正在传输的类型由Conntent－Type加以标记。         </li>
-</ul>
-<ul>
-<li>无连接：无连接的含义是限制每次连接只处理一个请求。服务器处理完客户的请求，并收到客户的应答后，即断开连接。采用这种方式可以节省传输时间。</li>
-</ul>
-<ul>
-<li>无状态：HTTP协议是无状态协议。无状态是指协议对于事务处理没有记忆能力。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传输的数据量增大。另一方面，在服务器不需要先前信息时挖的应答就较快。   </li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/11/06/博客6/" data-id="ciuuxs00a0003qgfy2jmxvs09" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/10/swift-音频AVAudioPlayer/" data-id="civz05jrg000cgcfyo9vuh90a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -731,7 +680,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -741,6 +690,10 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/11/26/微信开发之AMR转MP3/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2016/10/29/微信开发之上传并下载多媒体文件到本地服务器/">微信开发之上传并下载多媒体文件到本地服务器</a>
@@ -756,10 +709,6 @@
         
           <li>
             <a href="/2016/08/29/html-div-纵向滑动/">html div 纵向滑动</a>
-          </li>
-        
-          <li>
-            <a href="/2016/01/30/unity3d-与-增强现实/">unity3d 与 增强现实</a>
           </li>
         
       </ul>
