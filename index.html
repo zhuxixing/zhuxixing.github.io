@@ -64,7 +64,7 @@
     <article id="post-微信开发之AMR转MP3" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/11/26/微信开发之AMR转MP3/" class="article-date">
-  <time datetime="2016-11-26T09:15:44.000Z" itemprop="datePublished">2016-11-26</time>
+  <time datetime="2016-11-26T09:22:35.000Z" itemprop="datePublished">2016-11-26</time>
 </a>
     
   </div>
@@ -75,14 +75,14 @@
       
         <h2 id="＃微信开发之AMR转MP3（-NET）">＃微信开发之AMR转MP3（.NET）</h2><p>#####在微信开发越来越火热的今天，可能有很多开发者被微信的多媒体录音下载到本地的AMR文件坑的不轻，在这里介绍一种可行的解决办法。<br>1、首先下载ffmpeg.exe程序，（这个太坑了当时找了好几个都不行，程序的大小起码得在20M以上才行，其他的可能都是坑爹的不知道什么垃圾软件）。<br>2、然后废话不多说直接就上代码和截图了。</p>
 <figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">Page_Load</span>(<span class="params"><span class="keyword">object</span> sender, EventArgs e</span>)        </span>&#123;  <span class="keyword">string</span> savepath = Server.MapPath(<span class="string">"~/uploadr/"</span>) + <span class="string">"文件名.amr"</span>;            <span class="keyword">string</span> mp3SavePth = Server.MapPath(<span class="string">"~/upload/mp3/"</span>) + <span class="string">"文件名.amr"</span>.Split(<span class="string">'.'</span>)[<span class="number">0</span>].ToString() + <span class="string">".mp3"</span>;            ConvertToMp3(savepath, mp3SavePth);        &#125;          <span class="function"><span class="keyword">public</span> <span class="keyword">string</span> <span class="title">ConvertToMp3</span>(<span class="params"><span class="keyword">string</span> pathBefore, <span class="keyword">string</span> pathLater</span>)    </span>&#123;        <span class="keyword">string</span> c = Server.MapPath(<span class="string">"/ffmpeg/"</span>) + <span class="string">"ffmpeg.exe -i "</span> + pathBefore + <span class="string">" "</span> + pathLater;        <span class="keyword">string</span> str = RunCmd(c);        <span class="keyword">return</span> str;    &#125;    <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;summary&gt;</span></span>    <span class="comment"><span class="xmlDocTag">///</span> 执行Cmd命令</span>    <span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;/summary&gt;</span></span>    <span class="function"><span class="keyword">private</span> <span class="keyword">string</span> <span class="title">RunCmd</span>(<span class="params"><span class="keyword">string</span> c</span>)    </span>&#123;        <span class="keyword">try</span>        &#123;            ProcessStartInfo info = <span class="keyword">new</span> ProcessStartInfo(<span class="string">"cmd.exe"</span>);            info.RedirectStandardOutput = <span class="keyword">false</span>;            info.UseShellExecute = <span class="keyword">false</span>;            Process p = Process.Start(info);            p.StartInfo.UseShellExecute = <span class="keyword">false</span>;            p.StartInfo.RedirectStandardInput = <span class="keyword">true</span>;            p.StartInfo.RedirectStandardOutput = <span class="keyword">true</span>;            p.StartInfo.RedirectStandardError = <span class="keyword">true</span>;            p.Start();            p.StandardInput.WriteLine(c);            p.StandardInput.AutoFlush = <span class="keyword">true</span>;            Thread.Sleep(<span class="number">1000</span>);            p.StandardInput.WriteLine(<span class="string">"exit"</span>);            p.WaitForExit();            <span class="keyword">string</span> outStr = p.StandardOutput.ReadToEnd();            p.Close();            <span class="keyword">return</span> outStr;        &#125;        <span class="keyword">catch</span> (Exception ex)        &#123;            <span class="keyword">return</span> <span class="string">"error"</span> + ex.Message;        &#125;    &#125;&#125;</span><br></pre></td></tr></table></figure>
-<p>要注意工程的结构</p>
+<p>要注意工程的结构,特别是文件路径、文件夹权限等问题。</p>
 <p><img src="/Users/qixiang/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/1193366863/Image/$L4${0`]D{}ED540[W@%JGW.png" alt="Mou icon"></p>
 <p>这个是在VS2010下的工程。如需人工服务请联系QQ：704539773</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/11/26/微信开发之AMR转MP3/" data-id="civz05jqm0002gcfyc2oricxs" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/11/26/微信开发之AMR转MP3/" data-id="civz0dq3w0002hefypfr5xh8e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -308,7 +308,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/29/微信开发之上传并下载多媒体文件到本地服务器/" data-id="civz05jqh0001gcfyzxjeobsq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/10/29/微信开发之上传并下载多媒体文件到本地服务器/" data-id="civz0dq3s0001hefyh0y3hngq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -346,7 +346,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/09/24/base60to十六进制C/" data-id="civz05jq60000gcfyss148ji1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/09/24/base60to十六进制C/" data-id="civz0dq360000hefyrx1jzgc9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -409,7 +409,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/29/html-div-纵向滑动副本/" data-id="civz05jrn000egcfy748ashmj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/08/29/html-div-纵向滑动副本/" data-id="civz0dq4q000ehefy34jgfcr6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -472,7 +472,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/29/html-div-纵向滑动/" data-id="civz05jrr000fgcfye6c0uz0v" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/08/29/html-div-纵向滑动/" data-id="civz0dq4s000fhefysg7fncak" class="article-share-link">Share</a>
       
       
     </footer>
@@ -510,7 +510,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/30/unity3d-与-增强现实/" data-id="civz05jr9000agcfytmse8065" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/01/30/unity3d-与-增强现实/" data-id="civz0dq4f000ahefyrjqevwd9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -547,7 +547,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/31/iosAPP横竖屏/" data-id="civz05jrj000dgcfynh9zew0k" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/31/iosAPP横竖屏/" data-id="civz0dq4o000dhefywz6p26f8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -585,7 +585,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/31/屏幕适配问题/" data-id="civz05jqq0003gcfy0nh6pb1v" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/31/屏幕适配问题/" data-id="civz0dq3z0003hefyeu3ab9c7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -613,7 +613,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/24/swift系统音频AudioServices/" data-id="civz05jre000bgcfy7sd1dosl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/24/swift系统音频AudioServices/" data-id="civz0dq4i000bhefy70cmq1on" class="article-share-link">Share</a>
       
       
     </footer>
@@ -651,7 +651,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/10/swift-音频AVAudioPlayer/" data-id="civz05jrg000cgcfyo9vuh90a" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/10/swift-音频AVAudioPlayer/" data-id="civz0dq4l000chefyya4333j9" class="article-share-link">Share</a>
       
       
     </footer>
